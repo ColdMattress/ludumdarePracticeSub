@@ -4,6 +4,7 @@ import gfx.SpriteSheet;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -13,7 +14,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 public class Game extends Canvas implements Runnable{
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public static final int WIDTH = 160;
@@ -21,34 +22,33 @@ public class Game extends Canvas implements Runnable{
 	public static final int SCALE = 3;
 	public static final String NAME = "GAME";
 	
-	private JFrame main;
+	private JFrame frame;
 	
 	public boolean running = false;
 	public int tickCount;
 	
 	private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 	private int[] pixels =((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-	
-	SpriteSheet sheet = new SpriteSheet("/sprite sheet.png");
+
+	private SpriteSheet spriteSheet = new SpriteSheet("/sprite sheet.png");
 	
 	public Game(){
 		setMinimumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
 		setMaximumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
 		setPreferredSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
 		
-		main = new JFrame(NAME);
+		frame = new JFrame(NAME);
 		
-		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		main.setLayout(new BorderLayout());
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout());
 		
-		main.add(this,BorderLayout.CENTER);
-		main.pack();
+		frame.add(this,BorderLayout.CENTER);
+		frame.pack();
 		
-		main.setResizable(false);
-		main.setLocationRelativeTo(null);
-		main.setVisible(true);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 	}
-	
 	
 	private synchronized void start() {
 		running = true;
